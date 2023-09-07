@@ -25,4 +25,13 @@ class Customer(Base):
 
     reviews = relationship('Review', back_populates='restaurant')
     customer = relationship('Customer', secondary='reviews')
+
+class Review(Base):
+    __tablename__ = 'reviews'
+
+    id = Column(Integer, primary_key=True)
+    description = Column(String)
+    star_rating = Column(Integer)
     
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    restaurant_id = Column(Integer, ForeignKey('restaurants.id'))
